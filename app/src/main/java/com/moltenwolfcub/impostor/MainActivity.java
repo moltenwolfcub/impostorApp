@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.nameRecyclerView);
         addButton = findViewById(R.id.addPlayerButton);
-        addPlayerRow = findViewById(R.id.addPlayerRow);
-        nameInput = findViewById(R.id.nameInput);
-        submitButton = findViewById(R.id.submitButton);
+        addPlayerRow = findViewById(R.id.addNameRow);
+        nameInput = findViewById(R.id.addNameInput);
+        submitButton = findViewById(R.id.addNameSubmitButton);
 
         nameList.add(new NameItem("Oliver"));
         nameList.add(new NameItem("Jude"));
