@@ -59,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
             addButton.setVisibility(View.GONE);
             addPlayerRow.setVisibility(View.VISIBLE);
             nameInput.requestFocus();
+
+            InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            if (manager != null) {
+                manager.showSoftInput(nameInput, InputMethodManager.SHOW_IMPLICIT);
+            }
         });
 
         submitButton.setOnClickListener(this::submitName);
