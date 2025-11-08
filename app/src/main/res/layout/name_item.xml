@@ -4,34 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/nameItemView"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/nameDisplayRow"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4"
-        android:background="?android:attr/selectableItemBackground"
-        android:padding="12dp"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        tools:text="Dummy Name" />
+        android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/editButton"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
-        android:src="@android:drawable/ic_menu_edit" />
+        <TextView
+            android:id="@+id/nameItemView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="12dp"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            tools:text="Dummy Name" />
 
-    <ImageButton
-        android:id="@+id/deleteButton"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
-        android:src="@android:drawable/ic_menu_delete" />
+        <ImageButton
+            android:id="@+id/nameEditButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:src="@android:drawable/ic_menu_edit" />
+
+        <ImageButton
+            android:id="@+id/nameDeleteButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:src="@android:drawable/ic_menu_delete" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/nameEditRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <EditText
+            android:id="@+id/nameEditInput"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:autofillHints="name"
+            android:ems="25"
+            android:hint="Enter name"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/nameEditSubmitButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="Submit" />
+
+        <TextView
+            android:id="@+id/nameEditSizeRef"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:padding="12dp"
+            android:text="_"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            tools:text="_" />
+
+    </LinearLayout>
+
 </LinearLayout>
