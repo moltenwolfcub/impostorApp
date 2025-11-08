@@ -20,9 +20,14 @@ import java.util.List;
 
 public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder> {
     List<NameItem> nameList;
+    EditListener editListener;
 
     public NameAdaptor(List<NameItem> nameList) {
         this.nameList = nameList;
+    }
+
+    public void setEditListener(EditListener listener) {
+        this.editListener = listener;
     }
 
     @NonNull
@@ -48,6 +53,10 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
             InputMethodManager manager = (InputMethodManager) holder.itemView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (manager != null) {
                 manager.showSoftInput(holder.editNameInput, InputMethodManager.SHOW_IMPLICIT);
+            }
+
+            if (editListener != null) {
+                editListener.onEditStarted(holder.editNameInput, holder.editRow, holder.displayRow);
             }
         });
 
@@ -91,6 +100,10 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
     public void addName(NameItem name) {
         nameList.add(name);
         notifyItemInserted(nameList.size() - 1);
+    }
+
+    public  interface EditListener {
+        void onEditStarted(EditText editText, View editRow, View displayRow);
     }
 
     static class NameViewHolder extends RecyclerView.ViewHolder {

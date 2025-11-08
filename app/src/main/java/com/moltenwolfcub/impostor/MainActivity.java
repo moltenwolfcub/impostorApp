@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText nameInput;
     private Button submitButton;
 
+    private EditText activeEditNameInput;
+    private View activeEditNameRow;
+    private View activeDisplayNameRow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NameAdaptor(nameList);
+        adapter.setEditListener((editText, editRow, displayRow) -> {
+            activeEditNameInput = editText;
+            activeEditNameRow = editRow;
+            activeDisplayNameRow = displayRow;
+        });
         recyclerView.setAdapter(adapter);
 
         nameInput.setOnEditorActionListener((v, actionId, event) -> {
@@ -80,18 +89,39 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN && nameInput.hasFocus()) {
-            Rect outRect = new Rect();
-            addPlayerRow.getGlobalVisibleRect(outRect);
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (nameInput.hasFocus()) {
+                Rect outRect = new Rect();
+                addPlayerRow.getGlobalVisibleRect(outRect);
 
-            if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
-                nameInput.clearFocus();
-                addPlayerRow.setVisibility(View.GONE);
-                addButton.setVisibility(View.VISIBLE);
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    nameInput.clearFocus();
+                    addPlayerRow.setVisibility(View.GONE);
+                    addButton.setVisibility(View.VISIBLE);
 
-                InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                if (manager != null) {
-                    manager.hideSoftInputFromWindow(nameInput.getWindowToken(), 0);
+                    InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    if (manager != null) {
+                        manager.hideSoftInputFromWindow(nameInput.getWindowToken(), 0);
+                    }
+                }
+            }
+            if (activeEditNameInput != null && activeEditNameInput.hasFocus()) {
+                Rect outRect = new Rect();
+                activeEditNameRow.getGlobalVisibleRect(outRect);
+
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    activeEditNameInput.clearFocus();
+                    activeEditNameRow.setVisibility(View.GONE);
+                    activeDisplayNameRow.setVisibility(View.VISIBLE);
+
+                    InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    if (manager != null) {
+                        manager.hideSoftInputFromWindow(activeEditNameInput.getWindowToken(), 0);
+                    }
+
+                    activeDisplayNameRow = null;
+                    activeEditNameRow = null;
+                    activeEditNameInput = null;
                 }
             }
         }
