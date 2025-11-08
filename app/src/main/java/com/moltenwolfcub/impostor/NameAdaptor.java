@@ -3,6 +3,7 @@ package com.moltenwolfcub.impostor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,12 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
         NameItem nameItem = nameList.get(position);
 
         holder.name.setText(nameItem.getName());
+
+        holder.deleteButton.setOnClickListener(v -> {
+            nameList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, nameList.size());
+        });
     }
 
     @Override
@@ -44,11 +51,15 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
 
     static class NameViewHolder extends RecyclerView.ViewHolder {
         TextView name;
+        ImageButton editButton;
+        ImageButton deleteButton;
 
         public NameViewHolder(@NonNull View view) {
             super(view);
 
             name = view.findViewById(R.id.nameItemView);
+            editButton = view.findViewById(R.id.editButton);
+            deleteButton = view.findViewById(R.id.deleteButton);
         }
     }
 }
