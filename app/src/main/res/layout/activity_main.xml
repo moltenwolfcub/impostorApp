@@ -61,6 +61,7 @@
                     android:autofillHints="name"
                     android:ems="25"
                     android:hint="Enter name"
+                    android:imeOptions="actionDone"
                     android:inputType="textPersonName" />
 
                 <Button

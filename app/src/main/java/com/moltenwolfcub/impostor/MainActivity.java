@@ -2,8 +2,10 @@ package com.moltenwolfcub.impostor;
 
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,20 +47,30 @@ public class MainActivity extends AppCompatActivity {
         adapter = new NameAdaptor(nameList);
         recyclerView.setAdapter(adapter);
 
+        nameInput.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
+                this.submitName(v);
+                return true;
+            }
+            return false;
+        });
+
         addButton.setOnClickListener(view -> {
             addButton.setVisibility(View.GONE);
             addPlayerRow.setVisibility(View.VISIBLE);
             nameInput.requestFocus();
         });
 
-        submitButton.setOnClickListener(view -> {
-            String name = nameInput.getText().toString().trim();
-            if (!name.isEmpty()) {
-                adapter.addName(new NameItem(name));
-                recyclerView.scrollToPosition(adapter.getItemCount() - 1);
-                nameInput.setText("");
-            }
-        });
+        submitButton.setOnClickListener(this::submitName);
+    }
+
+    private void submitName(View v) {
+        String name = nameInput.getText().toString().trim();
+        if (!name.isEmpty()) {
+            adapter.addName(new NameItem(name));
+            recyclerView.scrollToPosition(adapter.getItemCount() - 1);
+            nameInput.setText("");
+        }
     }
 
     @Override
