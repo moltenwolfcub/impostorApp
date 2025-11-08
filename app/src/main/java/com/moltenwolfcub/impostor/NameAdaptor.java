@@ -1,9 +1,11 @@
 package com.moltenwolfcub.impostor;
 
 import android.content.Context;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,6 +66,14 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
             }
 
             notifyItemChanged(position);
+        });
+
+        holder.editNameInput.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
+                holder.submitEditButton.performClick();
+                return true;
+            }
+            return false;
         });
 
         holder.deleteButton.setOnClickListener(v -> {
