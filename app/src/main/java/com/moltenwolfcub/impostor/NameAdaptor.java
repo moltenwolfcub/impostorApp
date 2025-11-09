@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
 import java.util.List;
 
 public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder> {
@@ -74,7 +75,9 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
                 manager.hideSoftInputFromWindow(holder.editNameInput.getWindowToken(), 0);
             }
 
-            notifyItemChanged(position);
+            int pos = holder.getAdapterPosition();
+            if (pos == RecyclerView.NO_POSITION) return;
+            notifyItemChanged(pos);
         });
 
         holder.editNameInput.setOnEditorActionListener((v, actionId, event) -> {
@@ -85,10 +88,48 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
             return false;
         });
 
+        holder.upButton.setEnabled(true);
+        holder.downButton.setEnabled(true);
+        holder.upButton.setAlpha(1.0f);
+        holder.downButton.setAlpha(1.0f);
+
+        int adapterPosition = holder.getAdapterPosition();
+        if (adapterPosition != RecyclerView.NO_POSITION) {
+            if (adapterPosition == 0) {
+                holder.upButton.setEnabled(false);
+                holder.upButton.setAlpha(0.3f);
+            }
+            if (adapterPosition == nameList.size() - 1) {
+                holder.downButton.setEnabled(false);
+                holder.downButton.setAlpha(0.3f);
+            }
+        }
+
+        holder.upButton.setOnClickListener(v -> {
+            int pos = holder.getAdapterPosition();
+            if (pos == RecyclerView.NO_POSITION) return;
+            Collections.swap(nameList, pos, pos-1);
+            notifyItemMoved(pos, pos-1);
+
+            notifyItemChanged(pos);
+            notifyItemChanged(pos-1);
+        });
+        holder.downButton.setOnClickListener(v -> {
+            int pos = holder.getAdapterPosition();
+            if (pos == RecyclerView.NO_POSITION) return;
+            Collections.swap(nameList, pos, pos+1);
+            notifyItemMoved(pos, pos+1);
+
+            notifyItemChanged(pos);
+            notifyItemChanged(pos+1);
+        });
+
         holder.deleteButton.setOnClickListener(v -> {
-            nameList.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, nameList.size());
+            int pos = holder.getAdapterPosition();
+            if (pos == RecyclerView.NO_POSITION) return;
+            nameList.remove(pos);
+            notifyItemRemoved(pos);
+            notifyItemRangeChanged(pos, nameList.size());
         });
     }
 
@@ -102,7 +143,7 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
         notifyItemInserted(nameList.size() - 1);
     }
 
-    public  interface EditListener {
+    public interface EditListener {
         void onEditStarted(EditText editText, View editRow, View displayRow);
     }
 
@@ -112,6 +153,8 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
 
         final TextView name;
         final ImageButton editButton;
+        final ImageButton upButton;
+        final ImageButton downButton;
         final ImageButton deleteButton;
 
         final Button submitEditButton;
@@ -125,6 +168,8 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
 
             name = view.findViewById(R.id.nameItemView);
             editButton = view.findViewById(R.id.nameEditButton);
+            upButton = view.findViewById(R.id.nameUpButton);
+            downButton = view.findViewById(R.id.nameDownButton);
             deleteButton = view.findViewById(R.id.nameDeleteButton);
 
             submitEditButton = view.findViewById(R.id.nameEditSubmitButton);
