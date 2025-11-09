@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder> {
-    List<NameItem> nameList;
+    final List<NameItem> nameList;
     EditListener editListener;
 
     public NameAdaptor(List<NameItem> nameList) {
@@ -107,15 +107,15 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
     }
 
     static class NameViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout displayRow;
-        LinearLayout editRow;
+        final LinearLayout displayRow;
+        final LinearLayout editRow;
 
-        TextView name;
-        ImageButton editButton;
-        ImageButton deleteButton;
+        final TextView name;
+        final ImageButton editButton;
+        final ImageButton deleteButton;
 
-        Button submitEditButton;
-        EditText editNameInput;
+        final Button submitEditButton;
+        final EditText editNameInput;
 
         public NameViewHolder(@NonNull View view) {
             super(view);

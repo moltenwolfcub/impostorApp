@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         nameInput.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
-                this.submitName(v);
+                submitButton.performClick();
                 return true;
             }
             return false;
@@ -75,16 +75,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        submitButton.setOnClickListener(this::submitName);
-    }
-
-    private void submitName(View v) {
-        String name = nameInput.getText().toString().trim();
-        if (!name.isEmpty()) {
-            adapter.addName(new NameItem(name));
-            recyclerView.scrollToPosition(adapter.getItemCount() - 1);
-            nameInput.setText("");
-        }
+        submitButton.setOnClickListener(view -> {
+            String name = nameInput.getText().toString().trim();
+            if (!name.isEmpty()) {
+                adapter.addName(new NameItem(name));
+                recyclerView.scrollToPosition(adapter.getItemCount() - 1);
+                nameInput.setText("");
+            }
+        });
     }
 
     @Override
