@@ -1,5 +1,7 @@
 package com.moltenwolfcub.impostor;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Category categoryItem = categoryList.get(position);
 
         holder.name.setText(categoryItem.getName());
+
+        holder.name.setOnClickListener(v -> {
+            Context ctx = v.getContext();
+            Intent intent = new Intent(ctx, CategoryActivity.class);
+            ctx.startActivity(intent);
+        });
     }
 
     @Override
