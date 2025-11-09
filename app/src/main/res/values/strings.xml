@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Impostor</string>
+    <string name="button_addPlayer">Add Player</string>
+    <string name="button_submit">Submit</string>
+    <string name="imageDesc_categoryEnable">Enable Category</string>
+    <string name="imageDesc_playerEdit">Edit Player Name</string>
+    <string name="imageDesc_playerDelete">Delete Player</string>
+    <string name="imageDesc_playerDown">Move Player Name Down</string>
+    <string name="imageDesc_playerUp">Move Player Name Up</string>
+    <string name="inputHint_name">Enter name</string>
+    <string name="subheading_category">Categories:</string>
+    <string name="subheading_player">Players:</string>
 </resources>

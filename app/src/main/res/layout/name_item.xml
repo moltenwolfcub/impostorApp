@@ -23,12 +23,12 @@
             tools:text="Dummy Name" />
 
         <ImageButton
-            android:id="@+id/categoryAddButton"
+            android:id="@+id/nameEditButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Edit Player Name"
+            android:contentDescription="@string/imageDesc_playerEdit"
             android:padding="8dp"
             android:src="@android:drawable/ic_menu_edit" />
 
@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Edit Player Name"
+            android:contentDescription="@string/imageDesc_playerUp"
             android:padding="8dp"
             android:src="@android:drawable/arrow_up_float" />
 
@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Edit Player Name"
+            android:contentDescription="@string/imageDesc_playerDown"
             android:padding="8dp"
             android:src="@android:drawable/arrow_down_float" />
 
@@ -58,7 +58,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Delete Player"
+            android:contentDescription="@string/imageDesc_playerDelete"
             android:padding="8dp"
             android:src="@android:drawable/ic_menu_delete" />
 
@@ -75,31 +75,22 @@
         <EditText
             android:id="@+id/nameEditInput"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="4.5"
             android:autofillHints="name"
             android:ems="25"
-            android:hint="Enter name"
+            android:hint="@string/inputHint_name"
             android:imeOptions="actionDone"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/nameEditSubmitButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:text="Submit" />
-
-        <TextView
-            android:id="@+id/nameEditSizeRef"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:padding="12dp"
-            android:text="_"
-            android:textSize="20sp"
-            android:visibility="invisible"
-            tools:text="_" />
+            android:text="@string/button_submit" />
 
     </LinearLayout>
 

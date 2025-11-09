@@ -17,12 +17,12 @@
         tools:text="Dummy Category" />
 
     <ImageButton
-        android:id="@+id/categoryAddButton"
+        android:id="@+id/categoryEnableButton"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Add Category"
+        android:contentDescription="@string/imageDesc_categoryEnable"
         android:padding="8dp"
         android:src="@android:drawable/ic_menu_add" />
 
