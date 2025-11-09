@@ -20,7 +20,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView nameRecycler;
-    private NameAdaptor nameAdaptor;
+    private NameAdapter nameAdapter;
     private final List<NameItem> nameList = new ArrayList<>();
 
     private RecyclerView categoryRecycler;
@@ -52,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
         nameList.add(new NameItem("Rhian"));
 
         nameRecycler.setLayoutManager(new LinearLayoutManager(this));
-        nameAdaptor = new NameAdaptor(nameList);
-        nameAdaptor.setEditListener((editText, editRow, displayRow) -> {
+        nameAdapter = new NameAdapter(nameList);
+        nameAdapter.setEditListener((editText, editRow, displayRow) -> {
             activeEditNameInput = editText;
             activeEditNameRow = editRow;
             activeDisplayNameRow = displayRow;
         });
-        nameRecycler.setAdapter(nameAdaptor);
+        nameRecycler.setAdapter(nameAdapter);
 
         categoryRecycler = findViewById(R.id.categoryRecyclerView);
 
@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(view -> {
             String name = nameInput.getText().toString().trim();
             if (!name.isEmpty()) {
-                nameAdaptor.addName(new NameItem(name));
-                nameRecycler.scrollToPosition(nameAdaptor.getItemCount() - 1);
+                nameAdapter.addName(new NameItem(name));
+                nameRecycler.scrollToPosition(nameAdapter.getItemCount() - 1);
                 nameInput.setText("");
             }
         });

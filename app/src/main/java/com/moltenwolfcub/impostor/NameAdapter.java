@@ -19,11 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Collections;
 import java.util.List;
 
-public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder> {
+public class NameAdapter extends RecyclerView.Adapter<NameAdapter.NameViewHolder> {
     final List<NameItem> nameList;
     EditListener editListener;
 
-    public NameAdaptor(List<NameItem> nameList) {
+    public NameAdapter(List<NameItem> nameList) {
         this.nameList = nameList;
     }
 
