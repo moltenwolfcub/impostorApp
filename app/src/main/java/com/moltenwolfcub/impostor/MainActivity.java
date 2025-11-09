@@ -19,9 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private NameAdaptor adapter;
+    private RecyclerView nameRecycler;
+    private NameAdaptor nameAdaptor;
     private final List<NameItem> nameList = new ArrayList<>();
+
+    private RecyclerView categoryRecycler;
+    private CategoryAdapter categoryAdapter;
+    private final List<Category> categoryList = new ArrayList<>();
 
     private Button addButton;
     private LinearLayout addPlayerRow;
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.nameRecyclerView);
+        nameRecycler = findViewById(R.id.nameRecyclerView);
         addButton = findViewById(R.id.addPlayerButton);
         addPlayerRow = findViewById(R.id.addNameRow);
         nameInput = findViewById(R.id.addNameInput);
@@ -47,14 +51,23 @@ public class MainActivity extends AppCompatActivity {
         nameList.add(new NameItem("Jude"));
         nameList.add(new NameItem("Rhian"));
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NameAdaptor(nameList);
-        adapter.setEditListener((editText, editRow, displayRow) -> {
+        nameRecycler.setLayoutManager(new LinearLayoutManager(this));
+        nameAdaptor = new NameAdaptor(nameList);
+        nameAdaptor.setEditListener((editText, editRow, displayRow) -> {
             activeEditNameInput = editText;
             activeEditNameRow = editRow;
             activeDisplayNameRow = displayRow;
         });
-        recyclerView.setAdapter(adapter);
+        nameRecycler.setAdapter(nameAdaptor);
+
+        categoryRecycler = findViewById(R.id.categoryRecyclerView);
+
+        categoryList.add(new Category("Food"));
+        categoryList.add(new Category("Household items"));
+
+        categoryRecycler.setLayoutManager(new LinearLayoutManager(this));
+        categoryAdapter = new CategoryAdapter(categoryList);
+        categoryRecycler.setAdapter(categoryAdapter);
 
         nameInput.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
@@ -78,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(view -> {
             String name = nameInput.getText().toString().trim();
             if (!name.isEmpty()) {
-                adapter.addName(new NameItem(name));
-                recyclerView.scrollToPosition(adapter.getItemCount() - 1);
+                nameAdaptor.addName(new NameItem(name));
+                nameRecycler.scrollToPosition(nameAdaptor.getItemCount() - 1);
                 nameInput.setText("");
             }
         });

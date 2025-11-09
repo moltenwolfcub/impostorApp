@@ -167,7 +167,7 @@ public class NameAdaptor extends RecyclerView.Adapter<NameAdaptor.NameViewHolder
             editRow = view.findViewById(R.id.nameEditRow);
 
             name = view.findViewById(R.id.nameItemView);
-            editButton = view.findViewById(R.id.nameEditButton);
+            editButton = view.findViewById(R.id.categoryAddButton);
             upButton = view.findViewById(R.id.nameUpButton);
             downButton = view.findViewById(R.id.nameDownButton);
             deleteButton = view.findViewById(R.id.nameDeleteButton);
