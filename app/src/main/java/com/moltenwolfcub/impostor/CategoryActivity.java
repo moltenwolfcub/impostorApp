@@ -24,14 +24,12 @@ public class CategoryActivity extends AppCompatActivity {
 
         category = getIntent().getParcelableExtra("category");
 
-        Log.d(this.getLocalClassName(), category.words.toString());
-
         categoryName = findViewById(R.id.categoryTitle);
         categoryName.setText(category.getName());
 
         wordRecycler = findViewById(R.id.wordRecyclerView);
-        wordRecycler.setLayoutManager(new LinearLayoutManager(this));
         wordAdapter = new WordAdapter(category.words);
+        wordRecycler.setLayoutManager(new LinearLayoutManager(this));
         wordRecycler.setAdapter(wordAdapter);
     }
 }

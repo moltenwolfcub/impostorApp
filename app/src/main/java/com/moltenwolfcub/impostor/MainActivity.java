@@ -21,11 +21,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView nameRecycler;
     private NameAdapter nameAdapter;
-    private final List<NameItem> nameList = new ArrayList<>();
 
     private RecyclerView categoryRecycler;
     private CategoryAdapter categoryAdapter;
-    private final List<Category> categoryList = new ArrayList<>();
 
     private Button addButton;
     private LinearLayout addPlayerRow;
@@ -41,26 +39,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        nameRecycler = findViewById(R.id.nameRecyclerView);
         addButton = findViewById(R.id.addPlayerButton);
         addPlayerRow = findViewById(R.id.addNameRow);
         nameInput = findViewById(R.id.addNameInput);
         submitButton = findViewById(R.id.addNameSubmitButton);
+        nameRecycler = findViewById(R.id.nameRecyclerView);
+        categoryRecycler = findViewById(R.id.categoryRecyclerView);
 
+        List<NameItem> nameList = new ArrayList<>();
         nameList.add(new NameItem("Oliver"));
         nameList.add(new NameItem("Jude"));
         nameList.add(new NameItem("Rhian"));
 
-        nameRecycler.setLayoutManager(new LinearLayoutManager(this));
         nameAdapter = new NameAdapter(nameList);
         nameAdapter.setEditListener((editText, editRow, displayRow) -> {
             activeEditNameInput = editText;
             activeEditNameRow = editRow;
             activeDisplayNameRow = displayRow;
         });
+        nameRecycler.setLayoutManager(new LinearLayoutManager(this));
         nameRecycler.setAdapter(nameAdapter);
 
-        categoryRecycler = findViewById(R.id.categoryRecyclerView);
+        List<Category> categoryList = new ArrayList<>();
 
         Category food = new Category("Food");
         food.addWord("Apple");
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
         categoryList.add(food);
         categoryList.add(houseItems);
 
-        categoryRecycler.setLayoutManager(new LinearLayoutManager(this));
         categoryAdapter = new CategoryAdapter(categoryList);
+        categoryRecycler.setLayoutManager(new LinearLayoutManager(this));
         categoryRecycler.setAdapter(categoryAdapter);
 
         nameInput.setOnEditorActionListener((v, actionId, event) -> {
