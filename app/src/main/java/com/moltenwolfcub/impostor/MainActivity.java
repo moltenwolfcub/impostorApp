@@ -62,8 +62,16 @@ public class MainActivity extends AppCompatActivity {
 
         categoryRecycler = findViewById(R.id.categoryRecyclerView);
 
-        categoryList.add(new Category("Food"));
-        categoryList.add(new Category("Household items"));
+        Category food = new Category("Food");
+        food.addWord("Apple");
+        food.addWord("Roast Chicken");
+        food.addWord("Shortbread");
+        Category houseItems = new Category("Household Items");
+        houseItems.addWord("Sofa");
+        houseItems.addWord("Blender");
+
+        categoryList.add(food);
+        categoryList.add(houseItems);
 
         categoryRecycler.setLayoutManager(new LinearLayoutManager(this));
         categoryAdapter = new CategoryAdapter(categoryList);
