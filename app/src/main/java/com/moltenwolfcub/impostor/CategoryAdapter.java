@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,9 +15,11 @@ import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
     final List<Category> categoryList;
+    private ActivityResultLauncher<Intent> launcher;
 
-    public CategoryAdapter(List<Category> categoryList) {
+    public CategoryAdapter(List<Category> categoryList, ActivityResultLauncher<Intent> launcher) {
         this.categoryList = categoryList;
+        this.launcher = launcher;
     }
 
     @NonNull
@@ -34,12 +37,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.name.setText(categoryItem.getName());
 
         holder.name.setOnClickListener(v -> {
-            Context ctx = v.getContext();
-            Intent intent = new Intent(ctx, CategoryActivity.class);
+            Intent intent = new Intent(v.getContext(), CategoryActivity.class);
             intent.putExtra("category", categoryItem);
-            if (ctx instanceof MainActivity) {
-                ((MainActivity) ctx).categoryLauncher.launch(intent);
-            }
+            launcher.launch(intent);
         });
     }
 

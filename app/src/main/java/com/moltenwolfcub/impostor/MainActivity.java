@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private View activeEditNameRow;
     private View activeDisplayNameRow;
 
-    public final ActivityResultLauncher<Intent> categoryLauncher = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> categoryLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         categoryList.add(food);
         categoryList.add(houseItems);
 
-        categoryAdapter = new CategoryAdapter(categoryList);
+        categoryAdapter = new CategoryAdapter(categoryList, categoryLauncher);
         categoryRecycler.setLayoutManager(new LinearLayoutManager(this));
         categoryRecycler.setAdapter(categoryAdapter);
 
