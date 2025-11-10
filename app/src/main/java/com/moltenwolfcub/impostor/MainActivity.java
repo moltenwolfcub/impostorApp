@@ -45,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     Category updatedCategory = result.getData().getParcelableExtra("updatedCategory");
                     if (updatedCategory != null) {
                         for (int i = 0; i < categoryList.size(); i++) {
-                            if (categoryList.get(i).getName().equals(updatedCategory.getName())) {
-                                //TODO probably should change from name equivalence to an ID system
+                            if (categoryList.get(i).id.equals(updatedCategory.id)) {
                                 categoryList.set(i, updatedCategory);
                                 categoryAdapter.notifyItemChanged(i);
                                 break;

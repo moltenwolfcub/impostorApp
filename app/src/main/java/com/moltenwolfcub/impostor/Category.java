@@ -1,23 +1,28 @@
 package com.moltenwolfcub.impostor;
 
 import android.os.Parcel;
+import android.os.ParcelUuid;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Category implements Parcelable {
+    public final UUID id;
     private String name;
     public List<String> words;
 
     public Category(String name) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.words = new ArrayList<>();
     }
 
     protected Category(Parcel in) {
+        id = ((ParcelUuid)in.readParcelable(ParcelUuid.class.getClassLoader())).getUuid();
         name = in.readString();
         words = in.createStringArrayList();
     }
@@ -35,7 +40,8 @@ public class Category implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(@NonNull Parcel parcel, int i) {
+    public void writeToParcel(@NonNull Parcel parcel, int flags) {
+        parcel.writeParcelable(new ParcelUuid(id), flags);
         parcel.writeString(name);
         parcel.writeStringList(words);
     }
