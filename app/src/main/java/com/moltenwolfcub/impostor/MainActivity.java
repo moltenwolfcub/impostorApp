@@ -1,5 +1,6 @@
 package com.moltenwolfcub.impostor;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView categoryRecycler;
     private CategoryAdapter categoryAdapter;
+    private final List<Category> categoryList = new ArrayList<>();
 
     private Button addButton;
     private LinearLayout addPlayerRow;
@@ -33,6 +38,25 @@ public class MainActivity extends AppCompatActivity {
     private EditText activeEditNameInput;
     private View activeEditNameRow;
     private View activeDisplayNameRow;
+
+    public final ActivityResultLauncher<Intent> categoryLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Category updatedCategory = result.getData().getParcelableExtra("updatedCategory");
+                    if (updatedCategory != null) {
+                        for (int i = 0; i < categoryList.size(); i++) {
+                            if (categoryList.get(i).getName().equals(updatedCategory.getName())) {
+                                //TODO probably should change from name equivalence to an ID system
+                                categoryList.set(i, updatedCategory);
+                                categoryAdapter.notifyItemChanged(i);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         });
         nameRecycler.setLayoutManager(new LinearLayoutManager(this));
         nameRecycler.setAdapter(nameAdapter);
-
-        List<Category> categoryList = new ArrayList<>();
 
         Category food = new Category("Food");
         food.addWord("Apple");

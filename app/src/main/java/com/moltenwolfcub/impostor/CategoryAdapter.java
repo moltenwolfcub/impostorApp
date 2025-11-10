@@ -37,7 +37,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             Context ctx = v.getContext();
             Intent intent = new Intent(ctx, CategoryActivity.class);
             intent.putExtra("category", categoryItem);
-            ctx.startActivity(intent);
+            if (ctx instanceof MainActivity) {
+                ((MainActivity) ctx).categoryLauncher.launch(intent);
+            }
         });
     }
 

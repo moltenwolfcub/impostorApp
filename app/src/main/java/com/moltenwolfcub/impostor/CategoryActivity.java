@@ -1,5 +1,6 @@
 package com.moltenwolfcub.impostor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -31,5 +32,13 @@ public class CategoryActivity extends AppCompatActivity {
         wordAdapter = new WordAdapter(category.words);
         wordRecycler.setLayoutManager(new LinearLayoutManager(this));
         wordRecycler.setAdapter(wordAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent result = new Intent();
+        result.putExtra("updatedCategory", category);
+        setResult(RESULT_OK, result);
+        super.onBackPressed();
     }
 }
