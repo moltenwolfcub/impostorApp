@@ -9,10 +9,30 @@
         android:id="@+id/wordView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="6.5"
         android:background="?android:attr/selectableItemBackground"
         android:padding="12dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         tools:text="Dummy Word" />
+
+    <ImageButton
+        android:id="@+id/wordEditButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/imageDesc_wordEdit"
+        android:padding="8dp"
+        android:src="@android:drawable/ic_menu_edit" />
+
+    <ImageButton
+        android:id="@+id/wordDeleteButton"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/imageDesc_wordDelete"
+        android:padding="8dp"
+        android:src="@android:drawable/ic_menu_delete" />
 </LinearLayout>

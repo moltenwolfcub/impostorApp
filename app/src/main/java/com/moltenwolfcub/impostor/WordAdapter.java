@@ -3,6 +3,7 @@ package com.moltenwolfcub.impostor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,14 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
         String wordItem = wordList.get(position);
 
         holder.word.setText(wordItem);
+
+        holder.deleteButton.setOnClickListener(v -> {
+            int pos = holder.getAdapterPosition();
+            if (pos == RecyclerView.NO_POSITION) return;
+            wordList.remove(pos);
+            notifyItemRemoved(pos);
+            notifyItemRangeChanged(pos, wordList.size());
+        });
     }
 
     @Override
@@ -39,11 +48,15 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
 
     static class WordViewHolder extends RecyclerView.ViewHolder {
         final TextView word;
+        final ImageButton editButton;
+        final ImageButton deleteButton;
 
         public WordViewHolder(@NonNull View view) {
             super(view);
 
             this.word = view.findViewById(R.id.wordView);
+            this.editButton = view.findViewById(R.id.wordEditButton);
+            this.deleteButton = view.findViewById(R.id.wordDeleteButton);
         }
     }
 }
