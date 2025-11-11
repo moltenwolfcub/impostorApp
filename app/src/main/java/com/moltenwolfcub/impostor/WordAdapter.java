@@ -46,6 +46,11 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
         return this.wordList.size();
     }
 
+    public void addWord(String word) {
+        wordList.add(word);
+        notifyItemInserted(wordList.size() - 1);
+    }
+
     static class WordViewHolder extends RecyclerView.ViewHolder {
         final TextView word;
         final ImageButton editButton;

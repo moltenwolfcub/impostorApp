@@ -40,6 +40,40 @@
                 android:scrollbars="vertical">
 
             </androidx.recyclerview.widget.RecyclerView>
+
+            <LinearLayout
+                android:id="@+id/addWordRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <EditText
+                    android:id="@+id/addWordInput"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:ems="25"
+                    android:hint="@string/inputHint_word"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="text" />
+
+                <Button
+                    android:id="@+id/addWordSubmitButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/button_submit" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/addWordButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/button_addWord" />
+
         </LinearLayout>
     </ScrollView>
 
