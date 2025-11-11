@@ -10,8 +10,11 @@
     <string name="imageDesc_playerUp">Move Player Name Up</string>
     <string name="imageDesc_wordDelete">Delete word</string>
     <string name="imageDesc_wordEdit">Edit Word</string>
+    <string name="inputHint_category">Enter Category Title</string>
     <string name="inputHint_name">Enter name</string>
     <string name="inputHint_word">Enter Word</string>
     <string name="subheading_category">Categories:</string>
     <string name="subheading_player">Players:</string>
+    <string name="imageDesc_categoryEdit">Edit Category Name</string>
+    <string name="imageDesc_categoryDelete">Delete Category</string>
 </resources>

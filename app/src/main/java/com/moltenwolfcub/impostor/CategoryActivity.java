@@ -1,5 +1,6 @@
 package com.moltenwolfcub.impostor;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,6 +33,14 @@ public class CategoryActivity extends AppCompatActivity {
     private RecyclerView wordRecycler;
     private WordAdapter wordAdapter;
 
+    private LinearLayout titleDisplayRow;
+    private LinearLayout titleEditRow;
+
+    private ImageButton titleEditButton;
+
+    private Button submitTitleButton;
+    private EditText editTitleInput;
+
     private EditText activeEditWordInput;
     private View activeEditWordRow;
     private View activeDisplayWordRow;
@@ -47,9 +57,49 @@ public class CategoryActivity extends AppCompatActivity {
         addWordRow = findViewById(R.id.addWordRow);
         wordInput = findViewById(R.id.addWordInput);
         submitWordButton = findViewById(R.id.addWordSubmitButton);
+        titleDisplayRow = findViewById(R.id.titleDisplayRow);
+        titleEditRow = findViewById(R.id.titleEditRow);
+        titleEditButton = findViewById(R.id.categoryEditButton);
+        submitTitleButton = findViewById(R.id.categoryEditSubmitButton);
+        editTitleInput = findViewById(R.id.categoryEditInput);
 
 
         categoryName.setText(category.getName());
+        editTitleInput.setText(category.getName());
+
+        titleEditButton.setOnClickListener(v -> {
+            titleDisplayRow.setVisibility(View.GONE);
+            titleEditRow.setVisibility(View.VISIBLE);
+            editTitleInput.requestFocus();
+
+            InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (manager != null) {
+                manager.showSoftInput(editTitleInput, InputMethodManager.SHOW_IMPLICIT);
+            }
+        });
+
+        submitTitleButton.setOnClickListener(v -> {
+            String newTitle = editTitleInput.getText().toString().trim();
+            if (!newTitle.isEmpty()) {
+                category.setName(newTitle);
+            }
+
+            titleDisplayRow.setVisibility(View.VISIBLE);
+            titleEditRow.setVisibility(View.GONE);
+
+            InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (manager != null) {
+                manager.hideSoftInputFromWindow(editTitleInput.getWindowToken(), 0);
+            }
+        });
+
+        editTitleInput.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
+                submitTitleButton.performClick();
+                return true;
+            }
+            return false;
+        });
 
         wordRecycler = findViewById(R.id.wordRecyclerView);
         wordAdapter = new WordAdapter(category.words);
@@ -114,6 +164,21 @@ public class CategoryActivity extends AppCompatActivity {
                     InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                     if (manager != null) {
                         manager.hideSoftInputFromWindow(wordInput.getWindowToken(), 0);
+                    }
+                }
+            }
+            if (editTitleInput.hasFocus()) {
+                Rect outRect = new Rect();
+                titleEditRow.getGlobalVisibleRect(outRect);
+
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    editTitleInput.clearFocus();
+                    titleEditRow.setVisibility(View.GONE);
+                    titleDisplayRow.setVisibility(View.VISIBLE);
+
+                    InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    if (manager != null) {
+                        manager.hideSoftInputFromWindow(editTitleInput.getWindowToken(), 0);
                     }
                 }
             }
