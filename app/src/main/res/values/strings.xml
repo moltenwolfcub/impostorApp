@@ -3,6 +3,10 @@
     <string name="button_addPlayer">Add Player</string>
     <string name="button_addWord">Add Word</string>
     <string name="button_submit">Submit</string>
+    <string name="imageDesc_categoryDelete">Delete Category</string>
+    <string name="imageDesc_categoryDeleteCancel">Cancel Delete</string>
+    <string name="imageDesc_categoryDeleteConfirm">Confirm Delete</string>
+    <string name="imageDesc_categoryEdit">Edit Category Name</string>
     <string name="imageDesc_categoryEnable">Enable Category</string>
     <string name="imageDesc_playerEdit">Edit Player Name</string>
     <string name="imageDesc_playerDelete">Delete Player</string>
@@ -15,6 +19,5 @@
     <string name="inputHint_word">Enter Word</string>
     <string name="subheading_category">Categories:</string>
     <string name="subheading_player">Players:</string>
-    <string name="imageDesc_categoryEdit">Edit Category Name</string>
-    <string name="imageDesc_categoryDelete">Delete Category</string>
+    <string name="text_deleteConfirmation">Confirm Delete?</string>
 </resources>
