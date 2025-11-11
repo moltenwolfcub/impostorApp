@@ -143,10 +143,6 @@ public class NameAdapter extends RecyclerView.Adapter<NameAdapter.NameViewHolder
         notifyItemInserted(nameList.size() - 1);
     }
 
-    public interface EditListener {
-        void onEditStarted(EditText editText, View editRow, View displayRow);
-    }
-
     static class NameViewHolder extends RecyclerView.ViewHolder {
         final LinearLayout displayRow;
         final LinearLayout editRow;

@@ -31,6 +31,10 @@ public class CategoryActivity extends AppCompatActivity {
     private RecyclerView wordRecycler;
     private WordAdapter wordAdapter;
 
+    private EditText activeEditWordInput;
+    private View activeEditWordRow;
+    private View activeDisplayWordRow;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,11 @@ public class CategoryActivity extends AppCompatActivity {
 
         wordRecycler = findViewById(R.id.wordRecyclerView);
         wordAdapter = new WordAdapter(category.words);
+        wordAdapter.setEditListener((editText, editRow, displayRow) -> {
+            activeEditWordInput = editText;
+            activeEditWordRow = editRow;
+            activeDisplayWordRow = displayRow;
+        });
         wordRecycler.setLayoutManager(new LinearLayoutManager(this));
         wordRecycler.setAdapter(wordAdapter);
 
@@ -106,6 +115,25 @@ public class CategoryActivity extends AppCompatActivity {
                     if (manager != null) {
                         manager.hideSoftInputFromWindow(wordInput.getWindowToken(), 0);
                     }
+                }
+            }
+            if (activeEditWordInput != null && activeEditWordInput.hasFocus()) {
+                Rect outRect = new Rect();
+                activeEditWordRow.getGlobalVisibleRect(outRect);
+
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    activeEditWordInput.clearFocus();
+                    activeEditWordRow.setVisibility(View.GONE);
+                    activeDisplayWordRow.setVisibility(View.VISIBLE);
+
+                    InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    if (manager != null) {
+                        manager.hideSoftInputFromWindow(activeEditWordInput.getWindowToken(), 0);
+                    }
+
+                    activeDisplayWordRow = null;
+                    activeEditWordRow = null;
+                    activeEditWordInput = null;
                 }
             }
         }
