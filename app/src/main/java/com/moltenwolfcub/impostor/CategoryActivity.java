@@ -166,6 +166,19 @@ public class CategoryActivity extends AppCompatActivity {
                 wordInput.setText("");
             }
         });
+
+        if (getIntent().getBooleanExtra("isNew", false)) {
+            titleDisplayRow.setVisibility(View.GONE);
+            titleEditRow.setVisibility(View.VISIBLE);
+            editTitleInput.setSelectAllOnFocus(true);
+            editTitleInput.requestFocus();
+            editTitleInput.setSelectAllOnFocus(false);
+
+            InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (manager != null) {
+                manager.showSoftInput(editTitleInput, InputMethodManager.SHOW_IMPLICIT);
+            }
+        }
     }
 
     @Override

@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView nameRecycler;
@@ -30,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private CategoryAdapter categoryAdapter;
     private final List<Category> categoryList = new ArrayList<>();
 
-    private Button addButton;
+    private Button addCategoryButton;
+
+    private Button addPlayerButton;
     private LinearLayout addPlayerRow;
     private EditText nameInput;
     private Button submitButton;
@@ -73,12 +74,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        addButton = findViewById(R.id.addPlayerButton);
+        addPlayerButton = findViewById(R.id.addPlayerButton);
         addPlayerRow = findViewById(R.id.addNameRow);
         nameInput = findViewById(R.id.addNameInput);
         submitButton = findViewById(R.id.addNameSubmitButton);
         nameRecycler = findViewById(R.id.nameRecyclerView);
         categoryRecycler = findViewById(R.id.categoryRecyclerView);
+        addCategoryButton = findViewById(R.id.addCategoryButton);
 
         List<NameItem> nameList = new ArrayList<>();
         nameList.add(new NameItem("Oliver"));
@@ -117,8 +119,8 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-        addButton.setOnClickListener(view -> {
-            addButton.setVisibility(View.GONE);
+        addPlayerButton.setOnClickListener(view -> {
+            addPlayerButton.setVisibility(View.GONE);
             addPlayerRow.setVisibility(View.VISIBLE);
             nameInput.requestFocus();
 
@@ -136,6 +138,18 @@ public class MainActivity extends AppCompatActivity {
                 nameInput.setText("");
             }
         });
+
+        addCategoryButton.setOnClickListener(View -> {
+            Category newCategory = new Category("New Category");
+
+            categoryList.add(newCategory);
+            categoryAdapter.notifyItemInserted(categoryList.size()-1);
+
+            Intent intent = new Intent(this, CategoryActivity.class);
+            intent.putExtra("category", newCategory);
+            intent.putExtra("isNew", true);
+            categoryLauncher.launch(intent);
+        });
     }
 
     @Override
@@ -148,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
                     nameInput.clearFocus();
                     addPlayerRow.setVisibility(View.GONE);
-                    addButton.setVisibility(View.VISIBLE);
+                    addPlayerButton.setVisibility(View.VISIBLE);
 
                     InputMethodManager manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                     if (manager != null) {
