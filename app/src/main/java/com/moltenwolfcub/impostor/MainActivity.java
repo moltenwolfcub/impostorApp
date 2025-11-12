@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView nameRecycler;
@@ -48,6 +49,17 @@ public class MainActivity extends AppCompatActivity {
                             if (categoryList.get(i).id.equals(updatedCategory.id)) {
                                 categoryList.set(i, updatedCategory);
                                 categoryAdapter.notifyItemChanged(i);
+                                break;
+                            }
+                        }
+                    }
+                } else if (result.getResultCode() == RESULT_FIRST_USER && result.getData() != null) {
+                    Category deletedCategory = result.getData().getParcelableExtra("deletedCategory");
+                    if (deletedCategory.id != null) {
+                        for (int i = 0; i < categoryList.size(); i++) {
+                            if (categoryList.get(i).id.equals(deletedCategory.id)) {
+                                categoryList.remove(i);
+                                categoryAdapter.notifyItemRemoved(i);
                                 break;
                             }
                         }

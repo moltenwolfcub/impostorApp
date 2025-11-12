@@ -35,11 +35,16 @@ public class CategoryActivity extends AppCompatActivity {
 
     private LinearLayout titleDisplayRow;
     private LinearLayout titleEditRow;
+    private LinearLayout titleDeleteRow;
 
     private ImageButton titleEditButton;
+    private ImageButton titleDeleteButton;
 
     private Button submitTitleButton;
     private EditText editTitleInput;
+
+    private ImageButton titleDeleteButtonYes;
+    private ImageButton titleDeleteButtonNo;
 
     private EditText activeEditWordInput;
     private View activeEditWordRow;
@@ -59,9 +64,13 @@ public class CategoryActivity extends AppCompatActivity {
         submitWordButton = findViewById(R.id.addWordSubmitButton);
         titleDisplayRow = findViewById(R.id.titleDisplayRow);
         titleEditRow = findViewById(R.id.titleEditRow);
+        titleDeleteRow = findViewById(R.id.titleDeleteRow);
         titleEditButton = findViewById(R.id.categoryEditButton);
+        titleDeleteButton = findViewById(R.id.categoryDeleteButton);
         submitTitleButton = findViewById(R.id.categoryEditSubmitButton);
         editTitleInput = findViewById(R.id.categoryEditInput);
+        titleDeleteButtonYes = findViewById(R.id.deleteYesButton);
+        titleDeleteButtonNo = findViewById(R.id.deleteNoButton);
 
 
         categoryName.setText(category.getName());
@@ -100,6 +109,23 @@ public class CategoryActivity extends AppCompatActivity {
                 return true;
             }
             return false;
+        });
+
+        titleDeleteButton.setOnClickListener(v -> {
+            titleDisplayRow.setVisibility(View.GONE);
+            titleDeleteRow.setVisibility(View.VISIBLE);
+        });
+
+        titleDeleteButtonYes.setOnClickListener(v -> {
+            Intent result = new Intent();
+            result.putExtra("deletedCategory", category);
+            setResult(RESULT_FIRST_USER, result);
+            finish();
+        });
+
+        titleDeleteButtonNo.setOnClickListener(v -> {
+            titleDisplayRow.setVisibility(View.VISIBLE);
+            titleDeleteRow.setVisibility(View.GONE);
         });
 
         wordRecycler = findViewById(R.id.wordRecyclerView);
@@ -144,10 +170,15 @@ public class CategoryActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent result = new Intent();
-        result.putExtra("updatedCategory", category);
-        setResult(RESULT_OK, result);
-        super.onBackPressed();
+        if (titleDeleteRow.getVisibility() == View.VISIBLE) {
+            titleDeleteRow.setVisibility(View.GONE);
+            titleDisplayRow.setVisibility(View.VISIBLE);
+        } else {
+            Intent result = new Intent();
+            result.putExtra("updatedCategory", category);
+            setResult(RESULT_OK, result);
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -181,6 +212,15 @@ public class CategoryActivity extends AppCompatActivity {
                     if (manager != null) {
                         manager.hideSoftInputFromWindow(editTitleInput.getWindowToken(), 0);
                     }
+                }
+            }
+            if (titleDeleteRow.getVisibility() == View.VISIBLE) {
+                Rect outRect = new Rect();
+                titleDeleteRow.getGlobalVisibleRect(outRect);
+
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    titleDeleteRow.setVisibility(View.GONE);
+                    titleDisplayRow.setVisibility(View.VISIBLE);
                 }
             }
             if (activeEditWordInput != null && activeEditWordInput.hasFocus()) {
