@@ -14,16 +14,19 @@ public class Category implements Parcelable {
     public final UUID id;
     private String name;
     public List<String> words;
+    public boolean enabled;
 
     public Category(String name) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.words = new ArrayList<>();
+        this.enabled = false;
     }
 
     protected Category(Parcel in) {
         id = ((ParcelUuid)in.readParcelable(ParcelUuid.class.getClassLoader())).getUuid();
         name = in.readString();
+        enabled = in.readBoolean();
         words = in.createStringArrayList();
     }
 
@@ -43,6 +46,7 @@ public class Category implements Parcelable {
     public void writeToParcel(@NonNull Parcel parcel, int flags) {
         parcel.writeParcelable(new ParcelUuid(id), flags);
         parcel.writeString(name);
+        parcel.writeBoolean(enabled);
         parcel.writeStringList(words);
     }
 

@@ -1,10 +1,10 @@
 package com.moltenwolfcub.impostor;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -35,11 +35,24 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         Category categoryItem = categoryList.get(position);
 
         holder.name.setText(categoryItem.getName());
+        if (categoryItem.enabled) {
+            holder.enableButton.setImageResource(android.R.drawable.ic_menu_mylocation);
+        } else {
+            holder.enableButton.setImageResource(android.R.drawable.ic_menu_add);
+        }
 
         holder.name.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), CategoryActivity.class);
             intent.putExtra("category", categoryItem);
             launcher.launch(intent);
+        });
+
+        holder.enableButton.setOnClickListener(v -> {
+            categoryItem.enabled = !categoryItem.enabled;
+
+            int pos = holder.getAdapterPosition();
+            if (pos == RecyclerView.NO_POSITION) return;
+            notifyItemChanged(pos);
         });
     }
 
@@ -50,11 +63,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     static class CategoryViewHolder extends RecyclerView.ViewHolder {
         final TextView name;
+        final ImageButton enableButton;
 
         public CategoryViewHolder(@NonNull View view) {
             super(view);
 
             this.name = view.findViewById(R.id.categoryItemView);
+            this.enableButton = view.findViewById(R.id.categoryEnableButton);
         }
     }
 }
