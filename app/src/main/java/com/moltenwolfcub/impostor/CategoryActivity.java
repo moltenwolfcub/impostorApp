@@ -82,6 +82,7 @@ public class CategoryActivity extends AppCompatActivity {
             String newTitle = editTitleInput.getText().toString().trim();
             if (!newTitle.isEmpty()) {
                 category.setName(newTitle);
+                categoryName.setText(newTitle);
             }
 
             titleDisplayRow.setVisibility(View.VISIBLE);
