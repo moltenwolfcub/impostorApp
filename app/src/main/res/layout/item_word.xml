@@ -30,7 +30,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/imageDesc_wordEdit"
             android:padding="8dp"
-            android:src="@android:drawable/ic_menu_edit" />
+            android:src="@drawable/icon_edit_note_24px" />
 
         <ImageButton
             android:id="@+id/wordDeleteButton"
@@ -40,7 +40,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/imageDesc_wordDelete"
             android:padding="8dp"
-            android:src="@android:drawable/ic_menu_delete" />
+            android:src="@drawable/icon_delete_24px" />
 
     </LinearLayout>
 

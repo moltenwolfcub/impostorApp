@@ -29,7 +29,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/imageDesc_categoryEdit"
             android:padding="8dp"
-            android:src="@android:drawable/ic_menu_edit" />
+            android:src="@drawable/icon_edit_24px" />
 
         <ImageButton
             android:id="@+id/categoryDeleteButton"
@@ -39,7 +39,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/imageDesc_categoryDelete"
             android:padding="8dp"
-            android:src="@android:drawable/ic_menu_delete" />
+            android:src="@drawable/icon_delete_24px" />
 
     </LinearLayout>
 
@@ -100,7 +100,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/imageDesc_categoryDeleteConfirm"
             android:padding="8dp"
-            android:src="@android:drawable/checkbox_on_background" />
+            android:src="@drawable/icon_delete_forever_24px" />
 
         <ImageButton
             android:id="@+id/deleteNoButton"
@@ -110,7 +110,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/imageDesc_categoryDeleteCancel"
             android:padding="8dp"
-            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+            android:src="@drawable/icon_cancel_24px" />
     </LinearLayout>
 
     <ScrollView

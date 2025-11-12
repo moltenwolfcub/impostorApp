@@ -26,6 +26,6 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/imageDesc_categoryEnable"
         android:padding="8dp"
-        android:src="@android:drawable/ic_menu_mylocation" />
+        android:src="@drawable/icon_add_circle_24px" />
 
 </LinearLayout>

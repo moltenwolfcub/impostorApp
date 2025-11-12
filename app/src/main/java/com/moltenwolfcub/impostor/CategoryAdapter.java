@@ -36,9 +36,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         holder.name.setText(categoryItem.getName());
         if (categoryItem.enabled) {
-            holder.enableButton.setImageResource(android.R.drawable.ic_menu_mylocation);
+            holder.enableButton.setImageResource(R.drawable.icon_add_circle_24px);
         } else {
-            holder.enableButton.setImageResource(android.R.drawable.ic_menu_add);
+            holder.enableButton.setImageResource(R.drawable.icon_add_circle_24px_empty);
         }
 
         holder.name.setOnClickListener(v -> {

@@ -30,7 +30,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/imageDesc_playerEdit"
             android:padding="8dp"
-            android:src="@android:drawable/ic_menu_edit" />
+            android:src="@drawable/icon_person_edit_24px" />
 
         <ImageButton
             android:id="@+id/nameUpButton"
@@ -40,7 +40,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/imageDesc_playerUp"
             android:padding="8dp"
-            android:src="@android:drawable/arrow_up_float" />
+            android:src="@drawable/icon_text_select_move_up_24px" />
 
         <ImageButton
             android:id="@+id/nameDownButton"
@@ -50,7 +50,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/imageDesc_playerDown"
             android:padding="8dp"
-            android:src="@android:drawable/arrow_down_float" />
+            android:src="@drawable/icon_text_select_move_down_24px" />
 
         <ImageButton
             android:id="@+id/nameDeleteButton"
@@ -60,7 +60,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/imageDesc_playerDelete"
             android:padding="8dp"
-            android:src="@android:drawable/ic_menu_delete" />
+            android:src="@drawable/icon_delete_24px" />
 
     </LinearLayout>
 
