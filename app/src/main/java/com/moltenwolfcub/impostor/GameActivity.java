@@ -14,6 +14,7 @@ public class GameActivity extends AppCompatActivity {
     private Button nextButton;
 
     private TextView imposterLabel;
+    private TextView wordDisplay;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
         playerName = findViewById(R.id.playerName);
         nextButton = findViewById(R.id.nextButton);
         imposterLabel = findViewById(R.id.imposterLabel);
+        wordDisplay = findViewById(R.id.wordDisplay);
 
         game = getIntent().getParcelableExtra("game");
         
@@ -45,8 +47,10 @@ public class GameActivity extends AppCompatActivity {
 
         if (current.isImposter) {
             imposterLabel.setText("Imposter");
+            wordDisplay.setText("You don't get to know the word");
         } else {
             imposterLabel.setText("Not imposter");
+            wordDisplay.setText(game.secretWord);
         }
     }
 }

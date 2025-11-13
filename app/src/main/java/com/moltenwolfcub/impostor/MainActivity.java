@@ -172,7 +172,28 @@ public class MainActivity extends AppCompatActivity {
                 Player imposter = players.get(rand.nextInt(players.size()));
                 imposter.isImposter = true;
 
-                String word = "Temporary secret word";
+                List<Category> activeCategories = new ArrayList<>();
+                for (int i = 0; i < categoryList.size(); i++) {
+                    Category currentCategory = categoryList.get(i);
+                    if (currentCategory.enabled) {
+                        activeCategories.add(currentCategory);
+                    }
+                }
+                if (activeCategories.isEmpty()) {
+                    activeCategories.addAll(categoryList);
+                }
+                List<String> enabledWords = new ArrayList<>();
+                for (int i = 0; i < activeCategories.size(); i++) {
+                    Category currentCategory = activeCategories.get(i);
+                    enabledWords.addAll(currentCategory.words);
+                }
+
+                if (enabledWords.isEmpty()) {
+                    //TODO some kind of feedback if no words are available
+                    return;
+                }
+
+                String word = enabledWords.get(rand.nextInt(enabledWords.size()));
 
                 Intent intent = new Intent(this, GameActivity.class);
                 intent.putExtra("game", new Game(players, word));
