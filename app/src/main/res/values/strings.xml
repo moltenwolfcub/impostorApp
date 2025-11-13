@@ -3,6 +3,7 @@
     <string name="button_addCategory">Add Category</string>
     <string name="button_addPlayer">Add Player</string>
     <string name="button_addWord">Add Word</string>
+    <string name="button_nextPlayer">Next Player</string>
     <string name="button_startGame">Start Game</string>
     <string name="button_submit">Submit</string>
     <string name="imageDesc_categoryDelete">Delete Category</string>
@@ -22,4 +23,6 @@
     <string name="subheading_category">Categories:</string>
     <string name="subheading_player">Players:</string>
     <string name="text_deleteConfirmation">Confirm Delete?</string>
+    <string name="text_revealHint">Hold to reveal</string>
+    <string name="text_imposterInfo">You are the imposter</string>
 </resources>
