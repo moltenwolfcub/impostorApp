@@ -172,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
                 Player imposter = players.get(rand.nextInt(players.size()));
                 imposter.isImposter = true;
 
+                Player startingPlayer = players.get(rand.nextInt(players.size()));
+
                 List<Category> activeCategories = new ArrayList<>();
                 for (int i = 0; i < categoryList.size(); i++) {
                     Category currentCategory = categoryList.get(i);
@@ -196,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 String word = enabledWords.get(rand.nextInt(enabledWords.size()));
 
                 Intent intent = new Intent(this, GameActivity.class);
-                intent.putExtra("game", new Game(players, word));
+                intent.putExtra("game", new Game(players, word, startingPlayer));
                 startActivity(intent);
             }
         });

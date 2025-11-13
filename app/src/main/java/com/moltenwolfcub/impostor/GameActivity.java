@@ -1,6 +1,7 @@
 package com.moltenwolfcub.impostor;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,8 +49,9 @@ public class GameActivity extends AppCompatActivity {
                 frontCard.setVisibility(View.VISIBLE);
                 updateUI();
             } else {
-                //TODO names given out
-                finish();
+                Intent intent = new Intent(this, DiscussionActivity.class);
+                intent.putExtra("game", game);
+                startActivity(intent);
             }
         });
 

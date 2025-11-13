@@ -27,6 +27,7 @@
     <string name="subheading_revealWord">Secret Word:</string>
     <string name="text_deleteConfirmation">Confirm Delete?</string>
     <string name="text_discussion">Discussion Time</string>
+    <string name="text_discussionPlayer">will start the discussion.</string>
     <string name="text_revealHint">Hold to reveal</string>
     <string name="text_imposterInfo">You are the imposter</string>
     <string name="text_reveal">Reveal Imposter and Secret Word</string>
