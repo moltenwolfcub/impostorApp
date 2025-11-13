@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private View activeEditNameRow;
     private View activeDisplayNameRow;
 
+    private Button startGameButton;
+
     private final ActivityResultLauncher<Intent> categoryLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         nameRecycler = findViewById(R.id.nameRecyclerView);
         categoryRecycler = findViewById(R.id.categoryRecyclerView);
         addCategoryButton = findViewById(R.id.addCategoryButton);
+        startGameButton = findViewById(R.id.startGameButton);
 
         List<NameItem> nameList = new ArrayList<>();
         nameList.add(new NameItem("Oliver"));
@@ -149,6 +152,23 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("category", newCategory);
             intent.putExtra("isNew", true);
             categoryLauncher.launch(intent);
+        });
+
+        startGameButton.setOnClickListener(view -> {
+            List<Player> players = new ArrayList<>();
+            for (int i = 0; i < nameList.size(); i++) {
+                NameItem name = nameList.get(i);
+
+                players.add(new Player(name));
+            }
+
+            String word = "Temporary secret word";
+
+            if (players.size() > 0) {
+                Intent intent = new Intent(this, GameActivity.class);
+                intent.putExtra("game", new Game(players, word));
+                startActivity(intent);
+            }
         });
     }
 

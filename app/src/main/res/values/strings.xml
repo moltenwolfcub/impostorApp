@@ -3,6 +3,7 @@
     <string name="button_addCategory">Add Category</string>
     <string name="button_addPlayer">Add Player</string>
     <string name="button_addWord">Add Word</string>
+    <string name="button_startGame">Start Game</string>
     <string name="button_submit">Submit</string>
     <string name="imageDesc_categoryDelete">Delete Category</string>
     <string name="imageDesc_categoryDeleteCancel">Cancel Delete</string>
