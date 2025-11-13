@@ -2,6 +2,7 @@ package com.moltenwolfcub.impostor;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,6 +13,11 @@ public class DiscussionActivity extends AppCompatActivity {
     private Game game;
 
     private TextView startingPlayer;
+    private View revealHolder;
+    private View revealedData;
+    private TextView revealImposter;
+    private TextView revealWord;
+    private View revealText;
     private Button finishGame;
 
     @Override
@@ -22,10 +28,25 @@ public class DiscussionActivity extends AppCompatActivity {
         game = getIntent().getParcelableExtra("game");
 
         startingPlayer = findViewById(R.id.startingPlayer);
+        revealHolder = findViewById(R.id.revealHolder);
+        revealedData = findViewById(R.id.revealLayout);
+        revealText = findViewById(R.id.revealText);
+        revealImposter = findViewById(R.id.revealImposter);
+        revealWord = findViewById(R.id.revealSecretWord);
         finishGame = findViewById(R.id.finishGame);
 
         String startingPlayerText = game.staringPlayer.name.getName() + " " + getString(R.string.text_discussionPlayer);
         startingPlayer.setText(startingPlayerText);
+
+        revealImposter.setText(game.imposter.name.getName());
+        revealWord.setText(game.secretWord);
+
+        revealHolder.setOnClickListener(v -> {
+            if (revealedData.getVisibility() == View.GONE) {
+                revealedData.setVisibility(View.VISIBLE);
+                revealText.setVisibility(View.GONE);
+            }
+        });
 
         finishGame.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);

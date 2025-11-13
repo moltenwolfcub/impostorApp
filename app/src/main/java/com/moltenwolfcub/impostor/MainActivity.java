@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 String word = enabledWords.get(rand.nextInt(enabledWords.size()));
 
                 Intent intent = new Intent(this, GameActivity.class);
-                intent.putExtra("game", new Game(players, word, startingPlayer));
+                intent.putExtra("game", new Game(players, word, startingPlayer, imposter));
                 startActivity(intent);
             }
         });

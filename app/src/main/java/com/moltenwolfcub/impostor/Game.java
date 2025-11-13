@@ -9,20 +9,23 @@ import java.util.List;
 
 public class Game implements Parcelable {
     private final List<Player> players;
+    public final Player staringPlayer;
+    public final Player imposter;
     private int playerIndex = 0;
     public final String secretWord;
-    public final Player staringPlayer;
 
-    public Game(List<Player> players, String secretWord, Player staringPlayer) {
+    public Game(List<Player> players, String secretWord, Player staringPlayer, Player imposter) {
         this.players = players;
         this.secretWord = secretWord;
         this.staringPlayer = staringPlayer;
+        this.imposter = imposter;
     }
 
     protected Game(Parcel in) {
         playerIndex = in.readInt();
         secretWord = in.readString();
         staringPlayer = in.readParcelable(Player.class.getClassLoader());
+        imposter = in.readParcelable(Player.class.getClassLoader());
         players = in.createTypedArrayList(Player.CREATOR);
     }
 
@@ -52,6 +55,7 @@ public class Game implements Parcelable {
         dest.writeInt(playerIndex);
         dest.writeString(secretWord);
         dest.writeParcelable(staringPlayer, flags);
+        dest.writeParcelable(imposter, flags);
         dest.writeTypedList(players);
     }
 
