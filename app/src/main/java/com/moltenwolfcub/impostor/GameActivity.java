@@ -13,6 +13,8 @@ public class GameActivity extends AppCompatActivity {
     private TextView playerName;
     private Button nextButton;
 
+    private TextView imposterLabel;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,7 @@ public class GameActivity extends AppCompatActivity {
 
         playerName = findViewById(R.id.playerName);
         nextButton = findViewById(R.id.nextButton);
+        imposterLabel = findViewById(R.id.imposterLabel);
 
         game = getIntent().getParcelableExtra("game");
         
@@ -39,5 +42,11 @@ public class GameActivity extends AppCompatActivity {
     private void updateUI() {
         Player current = game.getCurrentPlayer();
         playerName.setText(current.name.getName());
+
+        if (current.isImposter) {
+            imposterLabel.setText("Imposter");
+        } else {
+            imposterLabel.setText("Not imposter");
+        }
     }
 }

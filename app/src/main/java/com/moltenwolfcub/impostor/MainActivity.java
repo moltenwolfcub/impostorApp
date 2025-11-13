@@ -20,8 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    private Random rand;
+
+
     private RecyclerView nameRecycler;
     private NameAdapter nameAdapter;
 
@@ -75,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        rand = new Random();
 
         addPlayerButton = findViewById(R.id.addPlayerButton);
         addPlayerRow = findViewById(R.id.addNameRow);
@@ -162,9 +168,12 @@ public class MainActivity extends AppCompatActivity {
                 players.add(new Player(name));
             }
 
-            String word = "Temporary secret word";
+            if (!players.isEmpty()) {
+                Player imposter = players.get(rand.nextInt(players.size()));
+                imposter.isImposter = true;
 
-            if (players.size() > 0) {
+                String word = "Temporary secret word";
+
                 Intent intent = new Intent(this, GameActivity.class);
                 intent.putExtra("game", new Game(players, word));
                 startActivity(intent);
