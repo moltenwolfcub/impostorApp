@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView categoryRecycler;
     private CategoryAdapter categoryAdapter;
-    private final List<Category> categoryList = new ArrayList<>();
+    private List<Category> categoryList;
 
     private Button addCategoryButton;
 
@@ -80,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SessionInfo session = getIntent().getParcelableExtra("session");
+        if (session == null) {
+            session = new SessionInfo();
+        }
+        categoryList = session.categories;
+
         rand = new Random();
 
         addPlayerButton = findViewById(R.id.addPlayerButton);
@@ -91,12 +97,7 @@ public class MainActivity extends AppCompatActivity {
         addCategoryButton = findViewById(R.id.addCategoryButton);
         startGameButton = findViewById(R.id.startGameButton);
 
-        List<NameItem> nameList = new ArrayList<>();
-        nameList.add(new NameItem("Oliver"));
-        nameList.add(new NameItem("Jude"));
-        nameList.add(new NameItem("Rhian"));
-
-        nameAdapter = new NameAdapter(nameList);
+        nameAdapter = new NameAdapter(session.currentPlayers);
         nameAdapter.setEditListener((editText, editRow, displayRow) -> {
             activeEditNameInput = editText;
             activeEditNameRow = editRow;
@@ -104,17 +105,6 @@ public class MainActivity extends AppCompatActivity {
         });
         nameRecycler.setLayoutManager(new LinearLayoutManager(this));
         nameRecycler.setAdapter(nameAdapter);
-
-        Category food = new Category("Food");
-        food.addWord("Apple");
-        food.addWord("Roast Chicken");
-        food.addWord("Shortbread");
-        Category houseItems = new Category("Household Items");
-        houseItems.addWord("Sofa");
-        houseItems.addWord("Blender");
-
-        categoryList.add(food);
-        categoryList.add(houseItems);
 
         categoryAdapter = new CategoryAdapter(categoryList, categoryLauncher);
         categoryRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -160,10 +150,11 @@ public class MainActivity extends AppCompatActivity {
             categoryLauncher.launch(intent);
         });
 
+        SessionInfo finalSession = session;
         startGameButton.setOnClickListener(view -> {
             List<Player> players = new ArrayList<>();
-            for (int i = 0; i < nameList.size(); i++) {
-                NameItem name = nameList.get(i);
+            for (int i = 0; i < finalSession.currentPlayers.size(); i++) {
+                NameItem name = finalSession.currentPlayers.get(i);
 
                 players.add(new Player(name));
             }
@@ -199,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(this, GameActivity.class);
                 intent.putExtra("game", new Game(players, word, startingPlayer, imposter));
+                intent.putExtra("session", finalSession);
                 startActivity(intent);
             }
         });

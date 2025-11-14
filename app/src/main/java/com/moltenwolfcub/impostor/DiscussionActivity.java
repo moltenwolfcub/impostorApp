@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class DiscussionActivity extends AppCompatActivity {
     private Game game;
+    private SessionInfo session;
 
     private TextView startingPlayer;
     private View revealHolder;
@@ -26,6 +27,7 @@ public class DiscussionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_discussion);
 
         game = getIntent().getParcelableExtra("game");
+        session = getIntent().getParcelableExtra("session");
 
         startingPlayer = findViewById(R.id.startingPlayer);
         revealHolder = findViewById(R.id.revealHolder);
@@ -51,6 +53,7 @@ public class DiscussionActivity extends AppCompatActivity {
         finishGame.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("session", session);
             startActivity(intent);
         });
     }

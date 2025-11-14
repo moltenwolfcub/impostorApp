@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameActivity extends AppCompatActivity {
     public Game game;
+    private SessionInfo session;
 
     private TextView playerNameFront;
     private TextView playerNameBack;
@@ -39,6 +40,7 @@ public class GameActivity extends AppCompatActivity {
         backCard = findViewById(R.id.backCard);
 
         game = getIntent().getParcelableExtra("game");
+        session = getIntent().getParcelableExtra("session");
         
         updateUI();
 
@@ -51,6 +53,7 @@ public class GameActivity extends AppCompatActivity {
             } else {
                 Intent intent = new Intent(this, DiscussionActivity.class);
                 intent.putExtra("game", game);
+                intent.putExtra("session", session);
                 startActivity(intent);
             }
         });
