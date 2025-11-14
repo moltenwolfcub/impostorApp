@@ -14,7 +14,7 @@ public class Category implements Parcelable {
     public final UUID id;
     private String name;
     public List<String> words;
-    public boolean enabled;
+    public transient boolean enabled;
 
     public Category(String name) {
         this.id = UUID.randomUUID();

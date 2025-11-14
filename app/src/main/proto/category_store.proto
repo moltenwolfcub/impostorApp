@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package imposter;
+
+option java_multiple_files = true;
+option java_package = "com.moltenwolfcub.impostor.protos";
+option java_outer_classname = "CategoryStore";
+
+message Category {
+    string id = 1;
+    string name = 2;
+    repeated string words = 3;
+}
+
+message CategoryList {
+    repeated Category categories = 1;
+}
