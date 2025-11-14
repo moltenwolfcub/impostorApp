@@ -57,4 +57,9 @@ public class DiscussionActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        finishGame.performClick();
+    }
 }
