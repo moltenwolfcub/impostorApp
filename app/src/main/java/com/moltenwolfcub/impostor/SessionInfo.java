@@ -1,18 +1,22 @@
 package com.moltenwolfcub.impostor;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.moltenwolfcub.impostor.protos.CategoryList;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class SessionInfo implements Parcelable {
     public List<NameItem> currentPlayers;
     public List<Category> categories;
 
-    public SessionInfo() {
+    public SessionInfo(Context context) {
         currentPlayers = new ArrayList<>();
         currentPlayers.add(new NameItem("Player 1"));
         currentPlayers.add(new NameItem("Player 2"));
@@ -21,16 +25,13 @@ public class SessionInfo implements Parcelable {
 
         categories = new ArrayList<>();
 
-        Category food = new Category("Food");
-        food.addWord("Apple");
-        food.addWord("Roast Chicken");
-        food.addWord("Shortbread");
-        Category houseItems = new Category("Household Items");
-        houseItems.addWord("Sofa");
-        houseItems.addWord("Blender");
+        CategoryList categoryList = CategoryStoreHelper.readCategories(context);
 
-        categories.add(food);
-        categories.add(houseItems);
+        for (com.moltenwolfcub.impostor.protos.Category categoryProto : categoryList.getCategoriesList()) {
+            Category category = new Category(categoryProto.getName(), UUID.fromString(categoryProto.getId()));
+            category.words.addAll(categoryProto.getWordsList());
+            categories.add(category);
+        }
     }
 
     protected SessionInfo(Parcel in) {

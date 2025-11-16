@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
                             if (categoryList.get(i).id.equals(updatedCategory.id)) {
                                 categoryList.set(i, updatedCategory);
                                 categoryAdapter.notifyItemChanged(i);
+
+                                CategoryStoreHelper.writeCategories(this, CategoryStoreHelper.toProto(categoryList));
+
                                 break;
                             }
                         }
@@ -67,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
                             if (categoryList.get(i).id.equals(deletedCategory.id)) {
                                 categoryList.remove(i);
                                 categoryAdapter.notifyItemRemoved(i);
+
+                                CategoryStoreHelper.writeCategories(this, CategoryStoreHelper.toProto(categoryList));
+
                                 break;
                             }
                         }
@@ -82,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         SessionInfo session = getIntent().getParcelableExtra("session");
         if (session == null) {
-            session = new SessionInfo();
+            session = new SessionInfo(this);
         }
         categoryList = session.categories;
 
@@ -143,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
 
             categoryList.add(newCategory);
             categoryAdapter.notifyItemInserted(categoryList.size()-1);
+
+            CategoryStoreHelper.writeCategories(this, CategoryStoreHelper.toProto(categoryList));
 
             Intent intent = new Intent(this, CategoryActivity.class);
             intent.putExtra("category", newCategory);

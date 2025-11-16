@@ -17,7 +17,11 @@ public class Category implements Parcelable {
     public transient boolean enabled;
 
     public Category(String name) {
-        this.id = UUID.randomUUID();
+        this(name, UUID.randomUUID());
+    }
+
+    public Category(String name, UUID id) {
+        this.id = id;
         this.name = name;
         this.words = new ArrayList<>();
         this.enabled = false;
