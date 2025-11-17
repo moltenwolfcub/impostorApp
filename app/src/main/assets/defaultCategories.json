@@ -1,0 +1,19 @@
+[
+    {
+        "name": "Food",
+        "enabled": true,
+        "words": [
+            "Apple",
+            "Roast Chicken",
+            "Shortbread"
+        ]
+    },
+    {
+        "name": "Household Items",
+        "enabled": true,
+        "words": [
+            "Sofa",
+            "Blender"
+        ]
+    }
+]

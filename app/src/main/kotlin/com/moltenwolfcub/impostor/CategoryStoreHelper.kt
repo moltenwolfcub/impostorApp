@@ -21,17 +21,4 @@ object CategoryStoreHelper {
             CategoryStore.get(context).updateData { categories }
         }
     }
-
-    @JvmStatic
-    fun toProto(categories: List<Category>): CategoryList {
-        val builder = CategoryList.newBuilder()
-        categories.forEach { c ->
-            val categoryBuilder = com.moltenwolfcub.impostor.protos.Category.newBuilder()
-                .setId(c.id.toString())
-                .setName(c.name)
-                .addAllWords(c.words)
-            builder.addCategories(categoryBuilder)
-        }
-        return builder.build()
-    }
 }

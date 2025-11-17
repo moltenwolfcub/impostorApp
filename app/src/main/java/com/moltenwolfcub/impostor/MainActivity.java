@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                                 categoryList.set(i, updatedCategory);
                                 categoryAdapter.notifyItemChanged(i);
 
-                                CategoryStoreHelper.writeCategories(this, CategoryStoreHelper.toProto(categoryList));
+                                CategoryStoreHelper.writeCategories(this, ProtoConversions.toProto(categoryList));
 
                                 break;
                             }
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                                 categoryList.remove(i);
                                 categoryAdapter.notifyItemRemoved(i);
 
-                                CategoryStoreHelper.writeCategories(this, CategoryStoreHelper.toProto(categoryList));
+                                CategoryStoreHelper.writeCategories(this, ProtoConversions.toProto(categoryList));
 
                                 break;
                             }
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             categoryList.add(newCategory);
             categoryAdapter.notifyItemInserted(categoryList.size()-1);
 
-            CategoryStoreHelper.writeCategories(this, CategoryStoreHelper.toProto(categoryList));
+            CategoryStoreHelper.writeCategories(this, ProtoConversions.toProto(categoryList));
 
             Intent intent = new Intent(this, CategoryActivity.class);
             intent.putExtra("category", newCategory);
