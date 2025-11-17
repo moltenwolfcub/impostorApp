@@ -1,7 +1,7 @@
 [
     {
+        "id": "fe58f537-107a-429d-98bf-4e2f841d34ee",
         "name": "Food",
-        "enabled": true,
         "words": [
             "Apple",
             "Roast Chicken",
@@ -9,8 +9,8 @@
         ]
     },
     {
+        "id": "e7f68f89-1d62-4665-8d14-6cf847c52413",
         "name": "Household Items",
-        "enabled": true,
         "words": [
             "Sofa",
             "Blender"

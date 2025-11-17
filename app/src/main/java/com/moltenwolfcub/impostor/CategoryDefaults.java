@@ -21,8 +21,9 @@ public class CategoryDefaults {
         byte[] buffer;
         try (InputStream stream = context.getAssets().open("defaultCategories.json")) {
             buffer = new byte[stream.available()];
+            int available = stream.available();
             int read = stream.read(buffer);
-            if (read != stream.available()) {
+            if (read != available) {
                 throw new IOException("Failed to read the whole json file");
             }
             stream.close();
@@ -54,7 +55,7 @@ public class CategoryDefaults {
         }
     }
 
-    public static void restoreDefaults(Context context) {
+    public static List<Category> restoreDefaults(Context context) {
         CategoryList storedCategories = CategoryStoreHelper.readCategories(context);
         List<Category> currentList = ProtoConversions.fromProto(storedCategories);
         List<Category> defaultList = loadDefaults(context);
@@ -77,6 +78,6 @@ public class CategoryDefaults {
                 }
             }
         }
-        CategoryStoreHelper.writeCategories(context, ProtoConversions.toProto(currentList));
+        return currentList;
     }
 }

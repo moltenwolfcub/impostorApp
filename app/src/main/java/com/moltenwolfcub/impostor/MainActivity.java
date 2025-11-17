@@ -3,6 +3,7 @@ package com.moltenwolfcub.impostor;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView categoryRecycler;
     private CategoryAdapter categoryAdapter;
     private List<Category> categoryList;
+
+    private ImageButton restoreDefaultCategories;
 
     private Button addCategoryButton;
 
@@ -100,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         submitButton = findViewById(R.id.addNameSubmitButton);
         nameRecycler = findViewById(R.id.nameRecyclerView);
         categoryRecycler = findViewById(R.id.categoryRecyclerView);
+        restoreDefaultCategories = findViewById(R.id.restoreDefaultsButton);
         addCategoryButton = findViewById(R.id.addCategoryButton);
         startGameButton = findViewById(R.id.startGameButton);
 
@@ -142,6 +147,16 @@ public class MainActivity extends AppCompatActivity {
                 nameRecycler.scrollToPosition(nameAdapter.getItemCount() - 1);
                 nameInput.setText("");
             }
+        });
+
+        restoreDefaultCategories.setOnClickListener(view -> {
+            List<Category> updatedList = CategoryDefaults.restoreDefaults(this);
+
+            categoryList.clear();
+            categoryList.addAll(updatedList);
+            categoryAdapter.notifyDataSetChanged();
+
+            CategoryStoreHelper.writeCategories(this, ProtoConversions.toProto(updatedList));
         });
 
         addCategoryButton.setOnClickListener(View -> {
