@@ -41,7 +41,7 @@ public class DiscussionActivity extends AppCompatActivity {
         startingPlayer.setText(startingPlayerText);
 
         revealImposter.setText(game.imposter.name.getName());
-        revealWord.setText(game.secretWord);
+        revealWord.setText(game.secretWord.contents);
 
         revealHolder.setOnClickListener(v -> {
             if (revealedData.getVisibility() == View.GONE) {

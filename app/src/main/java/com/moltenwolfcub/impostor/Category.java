@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Category implements Parcelable {
     public final UUID id;
     private String name;
-    public List<String> words;
+    public List<Word> words;
     public transient boolean enabled;
 
     public Category(String name) {
@@ -31,7 +31,7 @@ public class Category implements Parcelable {
         id = ((ParcelUuid)in.readParcelable(ParcelUuid.class.getClassLoader())).getUuid();
         name = in.readString();
         enabled = in.readBoolean();
-        words = in.createStringArrayList();
+        words = in.createTypedArrayList(Word.CREATOR);
     }
 
     public String getName() {
@@ -43,7 +43,7 @@ public class Category implements Parcelable {
     }
 
     public void addWord(String word) {
-        this.words.add(word);
+        this.words.add(new Word(word, name));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Category implements Parcelable {
         parcel.writeParcelable(new ParcelUuid(id), flags);
         parcel.writeString(name);
         parcel.writeBoolean(enabled);
-        parcel.writeStringList(words);
+        parcel.writeTypedList(words, flags);
     }
 
     @Override

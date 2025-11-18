@@ -19,6 +19,7 @@ public class GameActivity extends AppCompatActivity {
     private TextView playerNameBack;
     private Button nextButton;
     private TextView secretWordDisplay;
+    private TextView categoryHint;
 
     private FrameLayout cardContainer;
     private View frontCard;
@@ -33,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
         playerNameBack = findViewById(R.id.playerNameBack);
         nextButton = findViewById(R.id.nextButton);
         secretWordDisplay = findViewById(R.id.secretWord);
+        categoryHint = findViewById(R.id.categoryHint);
 
         cardContainer = findViewById(R.id.cardContainer);
         frontCard = findViewById(R.id.frontCard);
@@ -89,7 +91,7 @@ public class GameActivity extends AppCompatActivity {
         if (current.isImposter) {
             secretWordDisplay.setText(R.string.text_imposterInfo);
         } else {
-            secretWordDisplay.setText(game.secretWord);
+            secretWordDisplay.setText(game.secretWord.contents);
         }
 
         if (current.hasBeenViewed) {
@@ -97,5 +99,7 @@ public class GameActivity extends AppCompatActivity {
         } else {
             nextButton.setAlpha(0.3f);
         }
+
+        categoryHint.setText(getString(R.string.text_categoryHintPrefix) + ": " + game.secretWord.categoryName);
     }
 }

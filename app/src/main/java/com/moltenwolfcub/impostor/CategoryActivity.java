@@ -129,7 +129,7 @@ public class CategoryActivity extends AppCompatActivity {
         });
 
         wordRecycler = findViewById(R.id.wordRecyclerView);
-        wordAdapter = new WordAdapter(category.words);
+        wordAdapter = new WordAdapter(category.words, category.getName());
         wordAdapter.setEditListener((editText, editRow, displayRow) -> {
             activeEditWordInput = editText;
             activeEditWordRow = editRow;

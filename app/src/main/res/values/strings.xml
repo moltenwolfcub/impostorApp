@@ -17,6 +17,7 @@
     <string name="imageDesc_playerDown">Move Player Name Down</string>
     <string name="imageDesc_playerUp">Move Player Name Up</string>
     <string name="imageDesc_restoreDefaults">Restore Default Categories</string>
+    <string name="imageDesc_revealIcon">Reveal icon</string>
     <string name="imageDesc_wordDelete">Delete word</string>
     <string name="imageDesc_wordEdit">Edit Word</string>
     <string name="inputHint_category">Enter Category Title</string>
@@ -26,6 +27,7 @@
     <string name="subheading_player">Players:</string>
     <string name="subheading_revealImposter">Imposter:</string>
     <string name="subheading_revealWord">Secret Word:</string>
+    <string name="text_categoryHintPrefix">"Category"</string>
     <string name="text_deleteConfirmation">Confirm Delete?</string>
     <string name="text_discussion">Discussion Time</string>
     <string name="text_discussionPlayer">will start the discussion.</string>

@@ -12,9 +12,9 @@ public class Game implements Parcelable {
     public final Player staringPlayer;
     public final Player imposter;
     private int playerIndex = 0;
-    public final String secretWord;
+    public final Word secretWord;
 
-    public Game(List<Player> players, String secretWord, Player staringPlayer, Player imposter) {
+    public Game(List<Player> players, Word secretWord, Player staringPlayer, Player imposter) {
         this.players = players;
         this.secretWord = secretWord;
         this.staringPlayer = staringPlayer;
@@ -23,7 +23,7 @@ public class Game implements Parcelable {
 
     protected Game(Parcel in) {
         playerIndex = in.readInt();
-        secretWord = in.readString();
+        secretWord = in.readParcelable(Word.class.getClassLoader());
         staringPlayer = in.readParcelable(Player.class.getClassLoader());
         imposter = in.readParcelable(Player.class.getClassLoader());
         players = in.createTypedArrayList(Player.CREATOR);
@@ -53,7 +53,7 @@ public class Game implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(playerIndex);
-        dest.writeString(secretWord);
+        dest.writeParcelable(secretWord, flags);
         dest.writeParcelable(staringPlayer, flags);
         dest.writeParcelable(imposter, flags);
         dest.writeTypedList(players);

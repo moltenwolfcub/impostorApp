@@ -14,7 +14,7 @@ public class ProtoConversions {
             com.moltenwolfcub.impostor.protos.Category.Builder categoryBuilder = com.moltenwolfcub.impostor.protos.Category.newBuilder()
                     .setId(c.id.toString())
                     .setName(c.getName())
-                    .addAllWords(c.words);
+                    .addAllWords(c.words.stream().map(w -> w.contents).toList());
             builder.addCategories(categoryBuilder);
         }
         return builder.build();

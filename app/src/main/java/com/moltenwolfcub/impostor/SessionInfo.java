@@ -29,7 +29,7 @@ public class SessionInfo implements Parcelable {
 
         for (com.moltenwolfcub.impostor.protos.Category categoryProto : categoryList.getCategoriesList()) {
             Category category = new Category(categoryProto.getName(), UUID.fromString(categoryProto.getId()));
-            category.words.addAll(categoryProto.getWordsList());
+            category.words.addAll(categoryProto.getWordsList().stream().map(w -> new Word(w, category.getName())).toList());
             categories.add(category);
         }
     }

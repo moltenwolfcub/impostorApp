@@ -71,9 +71,10 @@ public class CategoryDefaults {
             if (existing == null) {
                 currentList.add(d);
             } else {
-                for (String word : d.words) {
-                    if (!existing.words.contains(word)) {
-                        existing.words.add(word);
+                for (Word w : d.words) {
+                    String wordStr = w.contents;
+                    if (!existing.words.stream().map(streamWord -> streamWord.contents).toList().contains(wordStr)) {
+                        existing.words.add(new Word(w.contents, existing.getName()));
                     }
                 }
             }

@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 if (activeCategories.isEmpty()) {
                     activeCategories.addAll(categoryList);
                 }
-                List<String> enabledWords = new ArrayList<>();
+                List<Word> enabledWords = new ArrayList<>();
                 for (int i = 0; i < activeCategories.size(); i++) {
                     Category currentCategory = activeCategories.get(i);
                     enabledWords.addAll(currentCategory.words);
@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                String word = enabledWords.get(rand.nextInt(enabledWords.size()));
+                Word word = enabledWords.get(rand.nextInt(enabledWords.size()));
 
                 Intent intent = new Intent(this, GameActivity.class);
                 intent.putExtra("game", new Game(players, word, startingPlayer, imposter));

@@ -19,11 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder>{
-    final List<String> wordList;
+    final List<Word> wordList;
     EditListener editListener;
 
-    public WordAdapter(List<String> wordList) {
+    String categoryName;
+
+    public WordAdapter(List<Word> wordList, String categoryName) {
         this.wordList = wordList;
+        this.categoryName = categoryName;
     }
 
     public void setEditListener(EditListener listener) {
@@ -40,7 +43,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull WordAdapter.WordViewHolder holder, int position) {
-        String wordItem = wordList.get(position);
+        String wordItem = wordList.get(position).contents;
 
         holder.word.setText(wordItem);
         holder.editWordInput.setText(wordItem);
@@ -66,7 +69,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
 
             String word = holder.editWordInput.getText().toString().trim();
             if (!word.isEmpty()) {
-                wordList.set(pos, word);
+                wordList.set(pos, new Word(word, categoryName));
             }
 
             holder.displayRow.setVisibility(View.VISIBLE);
@@ -103,7 +106,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
     }
 
     public void addWord(String word) {
-        wordList.add(word);
+        wordList.add(new Word(word, categoryName));
         notifyItemInserted(wordList.size() - 1);
     }
 
