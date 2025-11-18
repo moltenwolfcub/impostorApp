@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 public class Player implements Parcelable {
     public NameItem name;
     public boolean isImposter;
+    public boolean hasBeenViewed = false;
 
     public Player(NameItem name) {
         this.name = name;

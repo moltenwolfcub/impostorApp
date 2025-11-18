@@ -1,6 +1,5 @@
 package com.moltenwolfcub.impostor;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -45,6 +44,10 @@ public class GameActivity extends AppCompatActivity {
         updateUI();
 
         nextButton.setOnClickListener(view -> {
+            if (!game.getCurrentPlayer().hasBeenViewed) {
+                return;
+            }
+
             if (game.hasNextPlayer()) {
                 game.nextPlayer();
                 backCard.setVisibility(View.GONE);
@@ -61,6 +64,10 @@ public class GameActivity extends AppCompatActivity {
         cardContainer.setOnTouchListener((view, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
+                    if (!game.getCurrentPlayer().hasBeenViewed) {
+                        game.getCurrentPlayer().hasBeenViewed = true;
+                        updateUI();
+                    }
                     frontCard.setVisibility(View.GONE);
                     backCard.setVisibility(View.VISIBLE);
                     return true;
@@ -83,6 +90,12 @@ public class GameActivity extends AppCompatActivity {
             secretWordDisplay.setText(R.string.text_imposterInfo);
         } else {
             secretWordDisplay.setText(game.secretWord);
+        }
+
+        if (current.hasBeenViewed) {
+            nextButton.setAlpha(1.0f);
+        } else {
+            nextButton.setAlpha(0.3f);
         }
     }
 }
