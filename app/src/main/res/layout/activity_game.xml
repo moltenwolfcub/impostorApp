@@ -11,6 +11,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,6 +25,7 @@
             android:id="@+id/frontCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="visible"
             app:cardCornerRadius="24dp"
             app:cardElevation="6dp"
             tools:visibility="gone">
