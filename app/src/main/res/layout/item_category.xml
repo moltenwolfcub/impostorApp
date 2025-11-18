@@ -11,11 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="7.5"
         android:background="?android:attr/selectableItemBackground"
-        android:padding="12dp"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
         android:clickable="true"
         android:focusable="true"
+        android:padding="12dp"
+        android:textSize="20sp"
         tools:text="Dummy Category" />
 
     <ImageButton
