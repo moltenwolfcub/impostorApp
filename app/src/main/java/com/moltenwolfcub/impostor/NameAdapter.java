@@ -140,7 +140,7 @@ public class NameAdapter extends RecyclerView.Adapter<NameAdapter.NameViewHolder
 
     public void addName(NameItem name) {
         nameList.add(name);
-        notifyItemInserted(nameList.size() - 1);
+        notifyItemChanged(nameList.size() - 2);
     }
 
     static class NameViewHolder extends RecyclerView.ViewHolder {
