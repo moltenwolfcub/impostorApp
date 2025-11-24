@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="icon_foreground">#DEDEDE</color>
+    <color name="icon_foreground_start">#FFFFFF</color>
+    <color name="icon_foreground_end">#4f4f4f</color>
     <color name="icon_background_start">#5D6FBD</color>
     <color name="icon_background_end">#1D2A65</color>
 </resources>
