@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -179,19 +180,26 @@ public class CategoryActivity extends AppCompatActivity {
                 manager.showSoftInput(editTitleInput, InputMethodManager.SHOW_IMPLICIT);
             }
         }
-    }
 
-    @Override
-    public void onBackPressed() {
-        if (titleDeleteRow.getVisibility() == View.VISIBLE) {
-            titleDeleteRow.setVisibility(View.GONE);
-            titleDisplayRow.setVisibility(View.VISIBLE);
-        } else {
-            Intent result = new Intent();
-            result.putExtra("updatedCategory", category);
-            setResult(RESULT_OK, result);
-            super.onBackPressed();
-        }
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (titleDeleteRow.getVisibility() == View.VISIBLE) {
+                    titleDeleteRow.setVisibility(View.GONE);
+                    titleDisplayRow.setVisibility(View.VISIBLE);
+                } else {
+                    Intent result = new Intent();
+                    result.putExtra("updatedCategory", category);
+                    setResult(RESULT_OK, result);
+                    finish();
+
+//                    optionally better than finish() because it lets other super behaviour run
+//                    setEnabled(false); // temporarily disable this callback
+//                    getOnBackPressedDispatcher().onBackPressed();
+                }
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @Override

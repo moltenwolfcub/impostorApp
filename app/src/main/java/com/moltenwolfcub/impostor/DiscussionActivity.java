@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,10 +57,18 @@ public class DiscussionActivity extends AppCompatActivity {
             intent.putExtra("session", session);
             startActivity(intent);
         });
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                finishGame.performClick();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
-    @Override
-    public void onBackPressed() {
-        finishGame.performClick();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        finishGame.performClick();
+//    }
 }
